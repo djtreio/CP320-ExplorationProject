@@ -1,0 +1,51 @@
+import time
+import RPi.GPIO as GPIO
+from matrix_utils import *
+GPIO.setmode(GPIO.BCM)
+
+pwm_pins = [13,18]
+GPIO.setup(pwm_pins, GPIO.OUT)
+
+red_pins = [27,22,5,6,26]
+GPIO.setup(red_pins, GPIO.OUT)
+
+green_pins = [16,20,21,23,17]
+GPIO.setup(green_pins, GPIO.OUT)
+
+green = GPIO.PWM(pwm_pins[0], 60)  # channel=12 frequency=60Hz
+green.start(95)
+
+red = GPIO.PWM(pwm_pins[1], 60)  # channel=12 frequency=60Hz
+red.start(95)
+
+red_matrix = [0,0,1,0,0]
+green_matrix = [1,0,0,0,0]
+
+set_leds(red_matrix,red_pins)
+set_leds(green_matrix,green_pins)
+
+
+time.sleep(1)
+try:
+        while True:
+                red_matrix = shift_matrix(red_matrix)
+                green_matrix = shift_matrix(green_matrix)
+
+                print("Red Matrix:   " + str(red_matrix))
+                print("Green Matrix: " + str(green_matrix))
+                print()
+
+                GPIO.output(red_pins,GPIO.HIGH)
+                GPIO.output(green_pins,GPIO.HIGH)
+
+                set_leds(red_matrix,red_pins)
+                set_leds(green_matrix,green_pins)
+                time.sleep(1)
+
+
+
+except KeyboardInterrupt:
+        pass
+red.stop()
+green.stop()
+GPIO.cleanup()

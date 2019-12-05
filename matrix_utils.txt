@@ -1,0 +1,14 @@
+import time
+import RPi.GPIO as GPIO
+
+
+def shift_matrix(matrix):
+	return matrix[1:] + matrix[:1]
+
+
+def set_leds(matrix,pins):
+	for i in range(len(pins)):
+		if matrix[i] == 1:
+			GPIO.output(pins[i],GPIO.HIGH)
+		else:
+			GPIO.output(pins[i],GPIO.LOW)
