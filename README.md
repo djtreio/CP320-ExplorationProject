@@ -1,4 +1,4 @@
-# CP320-ExplorationProject
+# CP320-ExplorationProject - By Jackson Reio
 
 ## Overview
 This project will provide the code and wiring necessary to turn on the LED's and cycle through the columns with different colours.
