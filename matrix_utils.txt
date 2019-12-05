@@ -9,6 +9,6 @@ def shift_matrix(matrix):
 def set_leds(matrix,pins):
 	for i in range(len(pins)):
 		if matrix[i] == 1:
-			GPIO.output(pins[i],GPIO.HIGH)
-		else:
 			GPIO.output(pins[i],GPIO.LOW)
+		else:
+			GPIO.output(pins[i],GPIO.HIGH)
